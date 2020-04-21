@@ -1,0 +1,92 @@
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<%@page import="com.bean.Airplane" %> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'companyAirplaneList.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<style>  
+	body {  
+	    background-image:url('images/greenbg.png');  
+	    background-size: cover;    
+	}  
+	h1{  
+	    margin:50px auto;  
+	    text-align: center;  
+	}  
+	  
+	table {  
+	    width:600px;  
+	    margin:50px auto;  
+	    border-collapse: collapse;  
+	    text-align: center;  
+	}  
+	  
+	table,th,td{border:1px solid black;}  
+	th{height:50px;}  
+	  
+	a:link {color:black;}      
+	a:visited {color:black;}   
+	a:hover {color:#f00;}   
+	a:active {color:#f60;}  
+	  
+	#toAdd{ text-align: center;}  
+	  
+	</style>  
+  </head>
+  
+  <body>
+     <h1>list</h1>  
+    <table style="border: 1px">  
+        <tr>
+            <th>ID</th>  
+            
+            <th>airplaneRoute</th> 
+            <th>airplaneDate</th>   
+            <th>airplaneFlyTime</th>  
+            <th>airplaneLandTime</th>  
+            <th>airplanePrice</th>  
+            <th>ticketNum</th>  
+            
+            <th colspan="3">operation</th>  
+        </tr>  
+        <%  List<Airplane> ss = (List<Airplane>)request.getAttribute("ss");   
+            for(Airplane s : ss){  
+        %>  
+        <tr>  
+            <td><%=s.getID() %></td>  
+            <td><%=s.getAirplaneRoute() %></td>  
+            <td><%=s.getAirplaneDate() %></td>  
+            <td><%=s.getAirplaneFlyTime() %></td>  
+            <td><%=s.getAirplaneLandTime() %></td>  
+            <td><%=s.getAirplanePrice() %></td>  
+            <td><%=s.getTicketNum() %></td>  
+
+            <td colspan="3">  
+                <a href="update.jsp?ID=<%=s.getID()%>&airplaneRoute=<%=s.getAirplaneRoute()%>&airplaneDate=<%=s.getAirplaneDate()%>&airplaneFlyTime=<%=s.getAirplaneFlyTime()%>&airplaneLandTime=<%=s.getAirplaneLandTime()%>&airplanePrice=<%=s.getAirplanePrice()%>&ticketNum=<%=s.getTicketNum()%>">change</a>  
+                    
+                <a href="deleteServlet?ID=<%=s.getID()%>" onclick="return confirm('delete?')">delete</a>  
+            </td>  
+        </tr>  
+        <%   
+            }  
+        %>  
+    </table>  
+    <div id="toAdd"><a href="add.jsp">add</a></div> 
+  </body>
+</html>
